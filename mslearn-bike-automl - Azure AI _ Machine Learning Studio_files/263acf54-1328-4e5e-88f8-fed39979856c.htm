@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="notranslate" translate="no">
+  <head>
+    <script>self["MonacoEnvironment"] = (function (paths) {
+          return {
+            globalAPI: false,
+            getWorkerUrl : function (moduleId, label) {
+              var result =  paths[label];
+              if (/^((http:)|(https:)|(file:)|(\/\/))/.test(result)) {
+                var currentUrl = String(window.location);
+                var currentOrigin = currentUrl.substr(0, currentUrl.length - window.location.hash.length - window.location.search.length - window.location.pathname.length);
+                if (result.substring(0, currentOrigin.length) !== currentOrigin) {
+                  var js = '/*' + label + '*/importScripts("' + result + '");';
+                  var blob = new Blob([js], { type: 'application/javascript' });
+                  return URL.createObjectURL(blob);
+                }
+              }
+              return result;
+            }
+          };
+        })({
+  "editorWorkerService": "/monacoeditorwork/editor.worker.bundle.js",
+  "css": "/monacoeditorwork/css.worker.bundle.js",
+  "html": "/monacoeditorwork/html.worker.bundle.js",
+  "json": "/monacoeditorwork/json.worker.bundle.js",
+  "typescript": "/monacoeditorwork/ts.worker.bundle.js",
+  "yaml": "/monacoeditorwork/yaml.worker.bundle.js",
+  "javascript": "/monacoeditorwork/ts.worker.bundle.js",
+  "less": "/monacoeditorwork/css.worker.bundle.js",
+  "scss": "/monacoeditorwork/css.worker.bundle.js",
+  "handlebars": "/monacoeditorwork/html.worker.bundle.js",
+  "razor": "/monacoeditorwork/html.worker.bundle.js"
+});</script>
+
+    <meta charset="utf-8" />
+    <meta
+      name="Description"
+      content="Azure Machine Learning Studio is a GUI-based integrated development environment for constructing and operationalizing Machine Learning workflow on Azure."
+    />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <title>Azure AI | Machine Learning Studio</title>
+
+    <style data-make-styles-bucket="m"></style>
+    <style data-merge-styles="true"></style>
+    <script type="module" crossorigin src="/assets/index-6226d573.js"></script>
+    <link rel="stylesheet" href="/assets/style-ddb590e6.css">
+  </head>
+
+  <body id="mlworkspace">
+    <div id="root"></div>
+
+    <script>
+      window.App_Region = "eastus";
+      window.Cloud_Api_Host = "eastus.api.azureml.ms";
+      window.App_InstrumentationKey = "##APPINSIGHTS_INSTRUMENTATIONKEY##";
+    </script>
+
+    <script>
+      // Best-effort attempt to pre-load our React Query cache from IndexedDb
+      try {
+        const startTime = performance.now();
+        const request = indexedDB.open("keyval-store");
+        request.onupgradeneeded = () => request.result.createObjectStore(storeName);
+        request.onsuccess = dbEvent => {
+          dbEvent.target.result
+            .transaction("keyval", "readonly")
+            .objectStore("keyval")
+            .get("REACT_QUERY_OFFLINE_CACHE").onsuccess = opEvent => {
+            try {
+              window.InitialReactQueryCacheData = JSON.parse(opEvent.target.result || "{}");
+              console.log(`React query cache restored in ${performance.now() - startTime} ms`);
+            } catch {}
+          };
+        };
+      } catch {}
+    </script>
+
+    
+  </body>
+</html>
